@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+/* Global backdrop and text rendering tweaks */
+@layer base {
+  html, body, #root { height: 100%; }
+}
+
+body {
+  background-color: #000; /* dark theme */
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.sora{
+  font-family: "Sora", sans-serif;
+  font-optical-sizing: auto;
+}
+/* Simple fade-in utilities */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+@layer utilities {
+  .animate-fade-in { animation: fadeIn 700ms ease-out both; }
+  .animate-fade-in-delay { animation: fadeIn 900ms ease-out both; animation-delay: 120ms; }
+  .animate-fade-in-delay-2 { animation: fadeIn 900ms ease-out both; animation-delay: 220ms; }
+}
+
+iframe {
+  border: none;
+}
+iframe::-webkit-media-controls-enclosure,
+iframe [title="Built with Spline"] {
+  display: none !important;
+}
