@@ -1,8 +1,23 @@
 "use client";
 
 import React, { useEffect, useId, useRef, useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "motion/react";
+import { CanvasRevealEffect } from "./CanvasRevealEffect";
 import { useOutsideClick } from "../hooks/use-outside-click";
+// Team leads images
+import PresidentImg from "../../assets/images/Team_leads/President.png";
+import VPImg from "../../assets/images/Team_leads/VP.png";
+import TreasurerImg from "../../assets/images/Team_leads/Treasurer.png";
+import TechImg from "../../assets/images/Team_leads/Tech.png";
+import PRImg from "../../assets/images/Team_leads/PR.png";
+import NECImg from "../../assets/images/Team_leads/NEC.png";
+import HOImg from "../../assets/images/Team_leads/HO.png";
+import FilmoImg from "../../assets/images/Team_leads/Filmo.png";
+import EventManagementImg from "../../assets/images/Team_leads/EventManagement.png";
+import ContentSocialMediaImg from "../../assets/images/Team_leads/ContentSocialMedia.png";
+import CRImg from "../../assets/images/Team_leads/CR.png";
+import Doc from "../../assets/images/Team_leads/Doc.png";
 
 export function ExpandableCardDemo() {
   const [active, setActive] = useState(null);
@@ -15,13 +30,11 @@ export function ExpandableCardDemo() {
         setActive(false);
       }
     }
-
     if (active && typeof active === "object") {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [active]);
@@ -36,7 +49,8 @@ export function ExpandableCardDemo() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/20 h-full w-full z-10" />
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm h-full w-full z-10"
+          />
         )}
       </AnimatePresence>
       <AnimatePresence>
@@ -45,50 +59,62 @@ export function ExpandableCardDemo() {
             <motion.button
               key={`button-${active.title}-${id}`}
               layout
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-              }}
-              exit={{
-                opacity: 0,
-                transition: {
-                  duration: 0.05,
-                },
-              }}
-              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
-              onClick={() => setActive(null)}>
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.05 } }}
+              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-neutral-800 rounded-full h-6 w-6"
+              onClick={() => setActive(null)}
+            >
               <CloseIcon />
             </motion.button>
             <motion.div
               layoutId={`card-${active.title}-${id}`}
               ref={ref}
-              className="w-full max-w-[500px]  h-full md:h-fit md:max-h-[90%]  flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden">
-              <motion.div layoutId={`image-${active.title}-${id}`}>
+              className="relative overflow-hidden w-full max-w-[500px]  h-full md:h-fit md:max-h-[90%]  flex flex-col bg-neutral-900 sm:rounded-3xl ring-1 ring-white/10 shadow-2xl shadow-black/40"
+            >
+              {/* Card-wide animated background */}
+              <CanvasRevealEffect
+                animationSpeed={3}
+                containerClassName="bg-transparent absolute inset-0"
+                colors={[[59,130,246],[139,92,246]]}
+                opacities={[0.08,0.12,0.18,0.3,0.45]}
+                dotSize={2}
+              />
+              <div className="absolute inset-0 [mask-image:radial-gradient(520px_at_center,white,transparent)] bg-black/40" />
+              <motion.div layoutId={`image-${active.title}-${id}`} className="relative rounded-t-3xl overflow-hidden">
+                <CanvasRevealEffect
+                  animationSpeed={5}
+                  containerClassName="bg-transparent absolute inset-0"
+                  colors={[[59, 130, 246], [139, 92, 246]]}
+                  opacities={[0.2, 0.3, 0.4, 0.6, 1]}
+                  dotSize={2}
+                />
+                <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50 dark:bg-black/80" />
                 <img
                   width={200}
                   height={200}
                   src={active.src}
                   alt={active.title}
-                  className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top" />
+                  className="relative z-10 w-full h-80 lg:h-80 object-contain"
+                />
               </motion.div>
 
               <div>
                 <div className="flex justify-between items-start p-4">
-                  <div className="">
+                  <div>
                     <motion.h3
                       layoutId={`title-${active.title}-${id}`}
-                      className="font-medium text-neutral-700 dark:text-neutral-200 text-base">
+                      className="font-semibold text-neutral-100 text-lg"
+                    >
                       {active.title}
                     </motion.h3>
-                    <motion.p
+                    <motion.span
                       layoutId={`description-${active.description}-${id}`}
-                      className="text-neutral-600 dark:text-neutral-400 text-base">
+                      className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-neutral-300 mt-1"
+                    >
                       {active.description}
-                    </motion.p>
+                    </motion.span>
                   </div>
-
                   <motion.a
                     layout
                     initial={{ opacity: 0 }}
@@ -96,7 +122,9 @@ export function ExpandableCardDemo() {
                     exit={{ opacity: 0 }}
                     href={active.ctaLink}
                     target="_blank"
-                    className="px-4 py-3 text-sm rounded-full font-bold bg-green-500 text-white">
+                    rel="noreferrer"
+                    className="px-4 py-2 text-sm rounded-full font-semibold text-white bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 shadow-md shadow-blue-900/30 border border-white/10"
+                  >
                     {active.ctaText}
                   </motion.a>
                 </div>
@@ -106,10 +134,9 @@ export function ExpandableCardDemo() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-neutral-600 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-400 [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]">
-                    {typeof active.content === "function"
-                      ? active.content()
-                      : active.content}
+                    className="text-neutral-300 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
+                  >
+                    {typeof active.content === "function" ? active.content() : active.content}
                   </motion.div>
                 </div>
               </div>
@@ -117,34 +144,58 @@ export function ExpandableCardDemo() {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul
-        className="max-w-8xl mx-auto w-full grid grid-cols-1 md:grid-cols-4 items-start gap-4">
-        {cards.map((card, index) => (
+      <ul className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-4 items-start gap-5">
+        {cards.map((card, idx) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
-            key={card.title}
+            key={`${card.description}-${idx}`}
             onClick={() => setActive(card)}
-            className="p-4 flex flex-col  hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer">
-            <div className="flex gap-4 flex-col  w-full">
-              <motion.div layoutId={`image-${card.title}-${id}`}>
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActive(card)}
+            aria-label={`Open card for ${card.title}`}
+            className="relative overflow-hidden p-4 flex flex-col rounded-2xl cursor-pointer bg-neutral-900/30 border border-white/10 hover:bg-neutral-900/50 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50"
+          >
+            {/* Card-wide animated background */}
+            <CanvasRevealEffect
+              animationSpeed={3}
+              containerClassName="bg-transparent absolute inset-0"
+              colors={[[59,130,246],[139,92,246]]}
+              opacities={[0.06,0.1,0.16,0.26,0.38]}
+              dotSize={2}
+            />
+            <div className="absolute inset-0 [mask-image:radial-gradient(440px_at_center,white,transparent)] bg-black/40" />
+            <div className="relative z-10 flex gap-4 flex-col w-full">
+              <motion.div layoutId={`image-${card.title}-${id}`} className="relative">
+                <CanvasRevealEffect
+                  animationSpeed={5}
+                  containerClassName="bg-transparent absolute inset-0"
+                  colors={[[59, 130, 246], [139, 92, 246]]}
+                  opacities={[0.2, 0.3, 0.4, 0.6, 1]}
+                  dotSize={2}
+                />
+                <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50 dark:bg-black/80" />
                 <img
                   width={100}
                   height={100}
                   src={card.src}
                   alt={card.title}
-                  className="h-60 w-full  rounded-lg object-cover object-top" />
+                  className="relative z-10 h-60 w-full rounded-2xl object-contain"
+                />
               </motion.div>
               <div className="flex justify-center items-center flex-col">
                 <motion.h3
                   layoutId={`title-${card.title}-${id}`}
-                  className="font-medium text-neutral-800 dark:text-neutral-200 text-center md:text-left text-base">
+                  className="font-semibold text-neutral-100 text-center md:text-left text-base"
+                >
                   {card.title}
                 </motion.h3>
-                <motion.p
+                <motion.span
                   layoutId={`description-${card.description}-${id}`}
-                  className="text-neutral-600 dark:text-neutral-400 text-center md:text-left text-base">
+                  className="mt-1 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-neutral-300"
+                >
                   {card.description}
-                </motion.p>
+                </motion.span>
               </div>
             </div>
           </motion.div>
@@ -178,7 +229,7 @@ export const CloseIcon = () => {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-4 w-4 text-black">
+      className="h-4 w-4 text-white">
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M18 6l-12 12" />
       <path d="M6 6l12 12" />
@@ -188,77 +239,124 @@ export const CloseIcon = () => {
 
 const cards = [
   {
-    description: "Co-Founder & CEO",
-    title: "Aarav Mehta",
-    src: "https://randomuser.me/api/portraits/men/32.jpg",
+    description: "President",
+    title: "Sucharith Akula",
+    src: PresidentImg,
     ctaText: "Connect",
     ctaLink: "https://www.linkedin.com/in/",
-    content: () => {
-      return (
-        <p>
-          Aarav is a visionary entrepreneur passionate about empowering
-          startups and student-led innovation. With a background in product
-          strategy and business development, he leads the E-Cell team in
-          shaping ideas into scalable ventures. <br /> <br />
-          His leadership ensures a culture of creativity, resilience, and
-          forward-thinking, making him the driving force behind our mission.
-        </p>
-      );
-    },
+    content: () => (
+      <p>Provides vision and leadership, ensuring the E-Cell achieves its mission of fostering entrepreneurship.</p>
+    ),
   },
   {
-    description: "Co-Founder & CTO",
-    title: "Sara Khan",
-    src: "https://randomuser.me/api/portraits/women/44.jpg",
+    description: "Vice President",
+    title: "Sumit Powar",
+    src: VPImg,
     ctaText: "Connect",
     ctaLink: "https://www.linkedin.com/in/",
-    content: () => {
-      return (
-        <p>
-          Sara is a tech innovator with expertise in full-stack development,
-          AI, and cloud solutions. She oversees the technical direction of our
-          projects and ensures our platforms are built for scale. <br /> <br />
-          Her mission is to bridge technology with entrepreneurial ambition,
-          helping student founders bring futuristic ideas to life.
-        </p>
-      );
-    },
+    content: () => (
+      <p>Supports leadership and oversees operations across initiatives and teams.</p>
+    ),
   },
   {
-    description: "Head of Community",
-    title: "Rohit Sharma",
-    src: "https://randomuser.me/api/portraits/men/75.jpg",
+    description: "Treasurer",
+    title: "Atharva Mali",
+    src: TreasurerImg,
     ctaText: "Connect",
     ctaLink: "https://www.linkedin.com/in/",
-    content: () => {
-      return (
-        <p>
-          Rohit is the connector of people and ideas. He builds strong
-          partnerships, manages events, and ensures our startup ecosystem
-          thrives. <br /> <br />
-          With a background in operations and community engagement, he
-          empowers founders with resources, mentorship, and a network that
-          accelerates growth.
-        </p>
-      );
-    },
+    content: () => (
+      <p>Manages budgets, funding, and financial planning for events and programs.</p>
+    ),
+  },
+  
+  {
+    description: "Public Relations",
+    title: "Miloshka Jennifer George Lima",
+    src: PRImg,
+    ctaText: "Connect",
+    ctaLink: "https://www.linkedin.com/in/",
+    content: () => (
+      <p>Builds brand presence and maintains strong relationships with partners and media.</p>
+    ),
   },
   {
-    description: "Design & Branding Lead",
-    title: "Priya Nair",
-    src: "https://randomuser.me/api/portraits/women/68.jpg",
+    description: "NEC Lead",
+    title: "Gaurav Sutar",
+    src: NECImg,
     ctaText: "Connect",
     ctaLink: "https://www.linkedin.com/in/",
-    content: () => {
-      return (
-        <p>
-          Priya blends creativity and strategy to craft compelling visual
-          identities for our startups and events. <br /> <br />
-          From design systems to brand storytelling, she ensures every idea is
-          presented with clarity, elegance, and impact, making innovation
-          visually unforgettable.
-        </p>
-      );
-    },
+    content: () => (
+      <p>Coordinates campus engagement and core club operations.</p>
+    ),
+  },
+  {
+    description: "Head of Operations",
+    title: "Rishika Singh",
+    src: HOImg,
+    ctaText: "Connect",
+    ctaLink: "https://www.linkedin.com/in/",
+    content: () => (
+      <p>Oversees day-to-day execution, logistics, and cross-team coordination.</p>
+    ),
+  },
+  {
+    description: "Film & Media",
+    title: "Shrikant Rathod",
+    src: FilmoImg,
+    ctaText: "Connect",
+    ctaLink: "https://www.linkedin.com/in/",
+    content: () => (
+      <p>Creates visual storytelling and media content for events and campaigns.</p>
+    ),
+  },
+  {
+    description: "Event Management",
+    title: "Shlok Shinde",
+    src: EventManagementImg,
+    ctaText: "Connect",
+    ctaLink: "https://www.linkedin.com/in/",
+    content: () => (
+      <p>Plans and executes events that bring founders, mentors, and ideas together.</p>
+    ),
+  },
+  {
+    description: "Content & Social Media",
+    title: "Soham Kore",
+    src: ContentSocialMediaImg,
+    ctaText: "Connect",
+    ctaLink: "https://www.linkedin.com/in/",
+    content: () => (
+      <p>Crafts content and manages social channels to engage the community.</p>
+    ),
+  },
+  {
+    description: "Tech Lead",
+    title: "Irfan Naikwade",
+    src: TechImg,
+    ctaText: "Connect",
+    ctaLink: "https://www.linkedin.com/in/",
+    content: () => (
+      <p>Leads technical development and ensures our platforms are scalable and reliable.</p>
+    ),
+  },
+  {
+    description: "Corporate Relations",
+    title: "Nihar Mahajan",
+    src: CRImg,
+    ctaText: "Connect",
+    ctaLink: "https://www.linkedin.com/in/",
+    content: () => (
+      <p>Builds partnerships and strengthens outreach within and beyond campus.</p>
+    ),
+  },
+  {
+    description: "Documentation",
+    title: "Rohit Jagtap",
+    src: Doc,
+    ctaText: "Connect",
+    ctaLink: "https://www.linkedin.com/in/",
+    content: () => (
+      <p>Maintains records and documentation to preserve knowledge for future teams.</p>
+    ),
   },
 ];

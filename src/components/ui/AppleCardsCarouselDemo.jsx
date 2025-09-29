@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Carousel, Card } from "./apple-cards-carousel";
+import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 
 export function AppleCardsCarouselDemo() {
   const cards = data.map((card, index) => (
@@ -9,9 +9,9 @@ export function AppleCardsCarouselDemo() {
   ));
 
   return (
-    <div className="w-full h-full py-20">
+    <div className="w-full h-full py-20 bg-neutral-950">
       <h2
-        className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white font-sans">
+        className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-200 font-sans">
        Explore, Engage, Experience.
       </h2>
       <Carousel items={cards} />
@@ -22,93 +22,92 @@ export function AppleCardsCarouselDemo() {
 const DummyContent = () => {
   return (
     <>
-      {[...new Array(3).fill(1)].map((_, index) => {
+      {[...new Array(1).fill(1)].map((_, index) => {
         return (
           <div
             key={"dummy-content" + index}
-            className="bg-black p-8 md:p-14 rounded-3xl mb-4">
-            <p
-              className="text-white text-base md:text-2xl font-sans max-w-3xl mx-auto">
-              <span className="font-boldtext-neutral-200">
-                The first rule of Apple club is that you boast about Apple club.
+            className="bg-neutral-800 p-8 md:p-14 rounded-3xl mb-4"
+          >
+            <p className="text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
+              <span className="font-bold text-neutral-200">
+                Empowering students to innovate and lead.
               </span>{" "}
-              Keep a journal, quickly jot down a grocery list, and take amazing
-              class notes. Want to convert those notes to text? No problem.
-              Langotiya jeetu ka mara hua yaar is ready to capture every
-              thought.
+              Our club organizes events, workshops, and competitions that help
+              you explore entrepreneurship, grow your skills, and connect with
+              mentors and industry leaders.
             </p>
-            <img
-              src="https://assets.aceternity.com/macbook.png"
-              alt="Macbook mockup from Aceternity UI"
-              height="500"
-              width="500"
-              className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain" />
           </div>
         );
       })}
     </>
   );
 };
+
 const data = [
   {
-    category: "Robotics",
-    title: "RoboFest 2025: Building the Future",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwpFmwCIWr7SGjFvpbhr2eHY1TMeSSkwnMhg&s",
+    category: "Club Orientation",
+    title: "Welcome to the E-Cell Journey 🚀",
+    src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: (
-      <div className="bg-black p-8 md:p-14 rounded-3xl mb-4">
-        <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
-          <span className="font-bold text-neutral-700 dark:text-neutral-200">
-            Dive into the world of robotics!
-          </span>{" "}
-          Participate in workshops, showcase your bots, and learn from leading innovators. Our RoboFest brings AI, mechanics, and creativity together for one epic experience.
-        </p>
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwpFmwCIWr7SGjFvpbhr2eHY1TMeSSkwnMhg&s"
-          alt="Robotics Workshop"
-          className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
-        />
-      </div>
+      <p className="text-neutral-400 text-base md:text-2xl font-sans">
+        Discover our vision, meet fellow innovators, and learn how to make the
+        most of your E-Cell experience.
+      </p>
     ),
   },
   {
-    category: "AI & ML",
-    title: "AI Innovation Summit",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjofTgDJiqEMg4pl5RcNKXF6kaEwiVD0gghQ&s",
+    category: "Workshops",
+    title: "Hands-On Startup Workshops 💡",
+    src: "https://images.unsplash.com/photo-1531554694128-c4c6665f59c2?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: (
-      <div className="bg-black p-8 md:p-14 rounded-3xl mb-4">
-        <p className="text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
-          <span className="font-bold text-neutral-700 dark:text-neutral-200">
-            Explore cutting-edge AI technology.
-          </span>{" "}
-          Join thought leaders, hands-on demos, and panel discussions on machine learning trends. Perfect for tech enthusiasts and future innovators.
-        </p>
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjofTgDJiqEMg4pl5RcNKXF6kaEwiVD0gghQ&s"
-          alt="AI Innovation Summit"
-          className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
-        />
-      </div>
+      <p className="text-neutral-400 text-base md:text-2xl font-sans">
+        Learn ideation, business models, fundraising, and pitching from experts
+        through interactive sessions.
+      </p>
     ),
   },
   {
-    category: "Hackathon",
-    title: "CodeSprint 2025: Hack the Future",
-    src: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=2000&auto=format&fit=crop",
+    category: "Competitions",
+    title: "Pitch Battles & Hackathons 🎤",
+    src: "https://images.unsplash.com/photo-1713869791518-a770879e60dc?q=80&w=2333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: (
-      <div className="bg-black p-8 md:p-14 rounded-3xl mb-4">
-        <p className="text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
-          <span className="font-bold text-neutral-200">
-            48 hours of pure coding madness!
-          </span>{" "}
-          Form teams, tackle challenges, and build innovative solutions for real-world problems. Networking, prizes, and bragging rights await the winners.
-        </p>
-        <img
-          src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=2000&auto=format&fit=crop"
-          alt="Hackathon Event"
-          className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
-        />
-      </div>
+      <p className="text-neutral-400 text-base md:text-2xl font-sans">
+        Compete with peers to pitch innovative ideas, build prototypes, and win
+        exciting prizes.
+      </p>
     ),
   },
-
+  {
+    category: "Networking",
+    title: "Meet Mentors & Alumni 🌐",
+    src: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: (
+      <p className="text-neutral-400 text-base md:text-2xl font-sans">
+        Connect with entrepreneurs, investors, and alumni who can guide your
+        startup journey.
+      </p>
+    ),
+  },
+  {
+    category: "Showcase",
+    title: "Innovation & Startup Fair 🛰️",
+    src: "https://images.unsplash.com/photo-1602081957921-9137a5d6eaee?q=80&w=2793&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: (
+      <p className="text-neutral-400 text-base md:text-2xl font-sans">
+        A platform for students to showcase their ideas, prototypes, and
+        products to a wider audience.
+      </p>
+    ),
+  },
+  {
+    category: "Opportunities",
+    title: "Internships & Hiring 💼",
+    src: "https://images.unsplash.com/photo-1511984804822-e16ba72f5848?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: (
+      <p className="text-neutral-400 text-base md:text-2xl font-sans">
+        Get access to internship and job opportunities through our partnerships
+        with startups and incubators.
+      </p>
+    ),
+  },
 ];

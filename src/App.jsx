@@ -4,6 +4,8 @@ import { AboutSect } from './components/AboutSect';
 import { TimelineDemo } from './components/TimelineDemo';
 import { Eventspotlight } from './components/Eventspotlight';
 import { TeamMember } from './components/TeamMember';
+import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
 export default function App() {
   return (
     <div className="min-h-screen bg-black">
@@ -14,7 +16,9 @@ export default function App() {
         <TimelineDemo /> 
         <Eventspotlight /> 
         <TeamMember /> 
+        <Contact /> 
       </main>
+      <Footer />
     </div>
   );
 }
