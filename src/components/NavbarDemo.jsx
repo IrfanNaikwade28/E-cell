@@ -35,7 +35,7 @@ export function NavbarDemo() {
   const [openDropdown, setOpenDropdown] = useState(null);
 
   return (
-    <div className="relative w-full z-[1000]">
+    <div className="relative w-full z-[60]">
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>

@@ -50,20 +50,21 @@ export function ExpandableCardDemo() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm h-full w-full z-10"
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm h-full w-full z-[120]"
           />
         )}
       </AnimatePresence>
       <AnimatePresence>
         {active && typeof active === "object" ? (
-          <div className="fixed inset-0  grid place-items-center z-[100]">
+          <div className="fixed inset-0 grid place-items-center z-[150]">
             <motion.button
               key={`button-${active.title}-${id}`}
               layout
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
-              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-neutral-800 rounded-full h-6 w-6"
+              aria-label="Close"
+              className="flex absolute top-4 right-4 z-[200] lg:hidden items-center justify-center bg-neutral-900/80 border border-white/10 rounded-full h-10 w-10 hover:bg-neutral-800/80"
               onClick={() => setActive(null)}
             >
               <CloseIcon />
@@ -235,15 +236,15 @@ export const CloseIcon = () => {
         },
       }}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+  width="28"
+  height="28"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-4 w-4 text-white">
+  className="h-5 w-5 text-white">
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M18 6l-12 12" />
       <path d="M6 6l12 12" />

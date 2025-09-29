@@ -1,11 +1,11 @@
 import Button from "./ui/Button";
 import { Hero3D } from "./Hero3D";
 import { Meteors } from "./ui/Meteors";
-export default function Hero() {
+export default function Hero({ onSplineReady }) {
   return (
     <section className="relative isolate overflow-hidden bg-black top-20">
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[60vh] sm:h-[60vh] opacity-80">
-        <Hero3D className="w-full h-full" />
+        <Hero3D className="w-full h-full" onReady={onSplineReady} />
       </div>
       {/* Edge fade overlay to hide Spline borders/outlines */}
       <div
