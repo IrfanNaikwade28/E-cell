@@ -21,6 +21,7 @@ import Doc from "../../assets/images/Team_leads/Doc.png";
 
 export function ExpandableCardDemo() {
   const [active, setActive] = useState(null);
+  const [showAllMobile, setShowAllMobile] = useState(false);
   const id = useId();
   const ref = useRef(null);
 
@@ -144,7 +145,7 @@ export function ExpandableCardDemo() {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-4 items-start gap-5">
+      <ul id="team-cards" className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-4 items-start gap-5">
         {cards.map((card, idx) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
@@ -154,7 +155,7 @@ export function ExpandableCardDemo() {
             tabIndex={0}
             onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActive(card)}
             aria-label={`Open card for ${card.title}`}
-            className="relative overflow-hidden p-4 flex flex-col rounded-2xl cursor-pointer bg-neutral-900/30 border border-white/10 hover:bg-neutral-900/50 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50"
+            className={`relative overflow-hidden p-4 flex flex-col rounded-2xl cursor-pointer bg-neutral-900/30 border border-white/10 hover:bg-neutral-900/50 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 ${!showAllMobile && idx >= 4 ? 'hidden md:block' : ''}`}
           >
             {/* Card-wide animated background */}
             <CanvasRevealEffect
@@ -201,6 +202,19 @@ export function ExpandableCardDemo() {
           </motion.div>
         ))}
       </ul>
+      {cards.length > 4 && (
+        <div className="mt-4 md:hidden flex justify-center">
+          <button
+            type="button"
+            onClick={() => setShowAllMobile((s) => !s)}
+            aria-expanded={showAllMobile}
+            aria-controls="team-cards"
+            className="px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 border border-white/10 shadow-md shadow-blue-900/30"
+          >
+            {showAllMobile ? 'Show less' : 'Show more'}
+          </button>
+        </div>
+      )}
     </>
   );
 }
